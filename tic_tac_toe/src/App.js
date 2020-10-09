@@ -1,62 +1,60 @@
 import React from "react";
 import "./App.css";
-
+import Box from './Box'
 class App extends React.Component {
   state = {
-    x: false,
-    o: false,
-    turn: true,
+    board: Array(9).fill(null),
+    isActive:true
   };
 
-  setOorX = () => {
-    console.log("worked");
-
-    this.setState((previousState) => {
+  handleArr = (val) => {
+    let newBoard = [...this.state.board]
+    let active = this.state.isActive;
+    if (this.state.isActive === true && newBoard[val] ===null) {
+     
+      newBoard[val]='X'
+      active = false;
+    }
+    else if(newBoard[val] ===null){
+      newBoard[val] = 'O'
+      
+      active= true;
+    
+    }
+    else {
       return {
-        turn: !previousState.turn,
-      };
-    });
-  };
-
+        board:newBoard,
+        isActive:active
+      }
+    
+    }
+   
+    this.setState((prevState) => {
+      return {
+        board:newBoard,
+        isActive:active
+      }
+    })
+  }
   render() {
-    console.log(this.state.turn);
+    console.log(this.state.board)
     return (
       <div className="gameboard">
-        <div className="row1">
-          <div id="cell1" onClick={(this.turn, this.setOorX)}>
-            <p>x</p>
-          </div>
-          <div id="cell2" onClick={this.setOorX}>
-            <p>x</p>
-          </div>
-          <div id="cell3" onClick={this.setOorX}>
-            <p>x</p>
-          </div>
+        <div className="row7">
+          <Box value={this.state.board[0]} handleArr={()=>this.handleArr(0)}></Box>
+          <Box value={this.state.board[1]} handleArr={()=>this.handleArr(1)}></Box>
+          <Box value={this.state.board[2]}handleArr={()=>this.handleArr(2)}></Box>
         </div>
-
         <div className="row2">
-          <div id="cell4" onClick={this.setOorX}>
-            <p>x</p>
-          </div>
-          <div id="cell5" onClick={this.setOorX}>
-            <p>x</p>
-          </div>
-          <div id="cell6" onClick={this.setOorX}>
-            <p>x</p>
-          </div>
-        </div>
-
-        <div className="row3">
-          <div id="cell7" onClick={this.setOorX}>
-            <p>x</p>
-          </div>
-          <div id="cell8" onClick={this.setOorX}>
-            <p>x</p>
-          </div>
-          <div id="cell9" onClick={this.setOorX}>
-            <p>x</p>
-          </div>
-        </div>
+        <Box value={this.state.board[3]} handleArr={()=>this.handleArr(3)}></Box>
+          <Box value={this.state.board[4]} handleArr={()=>this.handleArr(4)}></Box>
+          <Box value={this.state.board[5]}handleArr={()=>this.handleArr(5)}></Box>
+         </div><div className="row3">
+         <Box value={this.state.board[6]} handleArr={()=>this.handleArr(6)}></Box>
+          <Box value={this.state.board[7]} handleArr={()=>this.handleArr(7)}></Box>
+          <Box value={this.state.board[8]}handleArr={()=>this.handleArr(8)}></Box>
+         </div>
+        
       </div>
     );
   }
