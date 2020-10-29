@@ -1,7 +1,7 @@
 import React from "react";
 const Box = (props) => {
     return (
-        <button className="btn" onClick={props.handleArr}>{props.value}</button>
+        <div className="btn" onClick={props.handleArr}>{props.value}</div>
     )
 }
 export default Box;

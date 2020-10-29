@@ -6,9 +6,11 @@ import Reset from "./Reset";
 class App extends React.Component {
   state = {
     board: Array(9).fill(null),
-    isActive: true,
-    gameOver: "gameover",
+    turn: true,
     winner: false,
+    gameOver: false,
+    player1: 0,
+    player2: 0,
   };
 
   resetBoard = () => {
@@ -20,8 +22,8 @@ class App extends React.Component {
 
   handleArr = (val) => {
     let newBoard = [...this.state.board];
-    let active = this.state.isActive;
-    if (this.state.isActive === true && newBoard[val] === null) {
+    let active = this.state.turn;
+    if (this.state.turn === true && newBoard[val] === null) {
       newBoard[val] = "X";
       active = false;
     } else if (newBoard[val] === null) {
@@ -31,27 +33,38 @@ class App extends React.Component {
     } else {
       return {
         board: newBoard,
-        isActive: active,
+        turn: active,
       };
     }
 
     this.setState((prevState) => {
       return {
         board: newBoard,
-        isActive: active,
+        turn: active,
       };
     });
   };
+
+  gameEnded = (currentState) => {
+    return this.setState((currentState.gameOver = true));
+  };
+
   render() {
     console.log(this.state.board);
+    console.log(this.state);
+
     return (
-      <div className="gameboard">
+      <div>
+        <h1 className='tictactoe'>Tic Tac Toe</h1>
         <Winner
           value={this.state.board}
           winner={this.state.winner}
-          gameover={this.state.gameOver}
+          changeWinner={this.state.changeWinner}
+          gameOver={this.state.gameOver}
+          gameEnded={this.gameEnded}
         ></Winner>
-        <div className="game">
+        <div className='buffer'></div>
+        <div className="gameboard">
           <Box
             value={this.state.board[0]}
             handleArr={() => this.handleArr(0)}
@@ -91,7 +104,10 @@ class App extends React.Component {
             handleArr={() => this.handleArr(8)}
           ></Box>
         </div>
-        <Reset resetBoard={this.resetBoard}></Reset>
+        <div className='reset'>
+           <Reset resetBoard={this.resetBoard}></Reset>
+        </div>
+       
       </div>
     );
   }
