@@ -1,5 +1,5 @@
 Getting Started
-Clone the repository: <git clone https://github.com/AlexBrown97/noughts-and-crosses.git>
+Clone the repository: <git clone https://github.com/chriskenyon1991/tic_tac_toe.git>
 
 Navigate into the repository directory: <cd noughts-and-crosses>
 
