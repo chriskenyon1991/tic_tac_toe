@@ -5,7 +5,9 @@ Navigate into the repository directory: <cd noughts-and-crosses>
 
 Install required modules: npm i
 
-Start the server: npm start Go to http://localhost:3000/
+Start the server: npm start
+
+Go to http://localhost:3000/
 
 Task:
 Create a Noughts and Crosses app with React.js
